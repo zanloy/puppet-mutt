@@ -62,25 +62,26 @@ class mutt (
   define setline ($path, $key=$name, $value) {
     $regex = "^${key}"
 
-    file_line { "${key}_line":
-      path => $path,
-      line => "${key} ${value}",
-      match => $regex,
+    if defined($value) {
+      file_line { "${key}_line":
+        path => $path,
+        line => "${key} ${value}",
+        match => $regex,
+      }
     }
   }
 
   $options = {
-    'alias_file' => { value => $alias_file },
+    'hostname'          => { value => $hostname },
+    'folder'            => { value => $folder },
+    'mbox'              => { value => $mbox },
+    'mbox_type'         => { value => $mbox_type },
+    'alias_file'        => { value => $alias_file },
+    'certificate_file'  => { value => $certificate_file },
+    'delete'            => { value => $delete },
+    'history_file'      => { value => $history_file },
   }
-  $defaults = {
-    'path' => $config_file,
-  }
-  create_resources(setline, $options, $defaults)
 
-  ## Puppet rides on ruby but can't handle ruby .each blocks... shameful.
-  #setline { $config_file:
-  #  key => 'alias_file',
-  #  value => $alias_file
-  #}
+  create_resources(setline, $options, { 'path' => $config_file })
 
 }
