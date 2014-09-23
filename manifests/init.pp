@@ -59,18 +59,29 @@ class mutt (
     mode => '0644',
   }
 
-  define setline ($key, $value) {
+  define setline {
+    $key = $name
     $regex = "^${key}"
+
     file_line { "${key}_line":
-      path => $name,
+      path => $path,
       line => "${key} ${value}",
       match => $regex,
     }
   }
 
-  setline { $config_file:
-    key => 'alias_file',
-    value => $alias_file
+  $options = {
+    'alias_file' => { value => $alias_file },
   }
+  $defaults = {
+    path => $config_file,
+  }
+  create_resources(setline, $options, $defaults)
+
+  ## Puppet rides on ruby but can't handle ruby .each blocks... shameful.
+  #setline { $config_file:
+  #  key => 'alias_file',
+  #  value => $alias_file
+  #}
 
 }
