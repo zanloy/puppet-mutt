@@ -59,7 +59,7 @@ class mutt (
     mode => '0644',
   }
 
-  define setline {
+  define setline ($path, $key, $value) {
     $key = $name
     $regex = "^${key}"
 
@@ -74,7 +74,7 @@ class mutt (
     'alias_file' => { value => $alias_file },
   }
   $defaults = {
-    path => $config_file,
+    'path' => $config_file,
   }
   create_resources(setline, $options, $defaults)
 
