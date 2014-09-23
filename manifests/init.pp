@@ -59,8 +59,7 @@ class mutt (
     mode => '0644',
   }
 
-  define setline ($path, $key, $value) {
-    $key = $name
+  define setline ($path, $key=$name, $value) {
     $regex = "^${key}"
 
     file_line { "${key}_line":
