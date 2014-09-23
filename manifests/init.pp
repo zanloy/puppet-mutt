@@ -59,14 +59,17 @@ class mutt (
     mode => '0644',
   }
 
-  define setline ($key=$name, $value) {
+  define setline ($key, $value) {
     file_line { "${key}_line":
-      path => $config_file,
+      path => $name,
       line => "${key} ${value}",
       match => "^[ \t]+${key}",
     }
   }
 
-  setline { 'alias_file': value => $alias_file }
+  setline { $config_file:
+    key => 'alias_file',
+    value => $alias_file
+  }
 
 }
