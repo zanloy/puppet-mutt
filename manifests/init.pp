@@ -60,10 +60,11 @@ class mutt (
   }
 
   define setline ($key, $value) {
+    $regex = "^${key}"
     file_line { "${key}_line":
       path => $name,
       line => "${key} ${value}",
-      match => "^[ \t]+${key}",
+      match => $regex,
     }
   }
 
