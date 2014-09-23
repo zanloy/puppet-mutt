@@ -62,7 +62,7 @@ class mutt (
   define setline ($path, $key=$name, $value) {
     $regex = "^${key}"
 
-    if defined($value) {
+    if $value {
       file_line { "${key}_line":
         path => $path,
         line => "${key} ${value}",
