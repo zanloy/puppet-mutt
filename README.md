@@ -4,7 +4,7 @@
 
 1. [Overview](#overview)
 2. [Usage](#usage)
-3. [Variables](#variables)
+3. [Parameters](#parameters)
 4. [Reference](#reference)
 5. [Limitations](#limitations)
 
@@ -31,62 +31,62 @@ Using system CA files for signature verification:
       certificate_file => '/etc/certs'
     }
 
-## Variables
+## Parameters
 
-[*alias_file*]
-  String. Location of your alias file.
-  Default: '~/.mutt/muttrc'
+### [*alias_file*]
+  * String. Location of your alias file.
+  * Default: '~/.mutt/muttrc'
 
-[*certificate_file*]
-  String. Location of your ca certificates file.
-  Default: '~/.mutt/certificates'
+### [*certificate_file*]
+  * String. Location of your ca certificates file.
+  * Default: '~/.mutt/certificates'
 
-[*config_file*]
-  String. Location of your global mutt config file.
-  Note: Do not change this unless mutt has been compiled to look for the
-        config file elsewhere. Otherwise it just will not read the config
-        file at all.
-  Default: '/etc/Muttrc'
+### [*config_file*]
+  * String. Location of your global mutt config file.
+  * Note: Do not change this unless mutt has been compiled to look for the
+          config file elsewhere. Otherwise it just will not read the config
+          file at all.
+  * Default: '/etc/Muttrc'
 
-[*date_format*]
-  String. Date format to use. Takes standard printf style arguments.
-  Default: If undef then we use the package defaults.
+### [*date_format*]
+  * String. Date format to use. Takes standard printf style arguments.
+  * Default: If undef then we use the package defaults.
 
-[*delete*]
-  String. What mutt will do when deleting files on exit.
-  Default: 'ask-yes'
-  Valid Options: 'no', 'yes', 'ask-yes'
+### [*delete*]
+  * String. What mutt will do when deleting files on exit.
+  * Default: 'ask-yes'
+  * Valid Options: 'no', 'yes', 'ask-yes'
 
-[*folder*]
-  String. The location of your mbox (or maildir) folder. Should be in home.
-  Default: '~/mail'
+### [*folder*]
+  * String. The location of your mbox (or maildir) folder. Should be in home.
+  * Default: '~/mail'
 
-[*history_file*]
-  String. The location of your history file.
-  Default: '~/.mutt/history'
+### [*history_file*]
+  * String. The location of your history file.
+  * Default: '~/.mutt/history'
 
-[*hostname*]
-  String. The hostname to use in From: in emails sent with mutt.
-  Default: If undef then mutt uses your hostname (not fqdn).
+### [*hostname*]
+  * String. The hostname to use in From: in emails sent with mutt.
+  * Default: If undef then mutt uses your hostname (not fqdn).
 
-[*index_format*]
-  String. The printf style format for displaying email information in the
+### [*index_format*]
+  * String. The printf style format for displaying email information in the
           mailbox view.
-  Default: If undef then we use mutt default.
+  * Default: If undef then we use mutt default.
 
-[*mbox*]
-  String. The location of your mbox.
-  Note: This should be the same as your $folder in 90% of cases.
-  Default: $folder
+### [*mbox*]
+  * String. The location of your mbox.
+  * Note: This should be the same as your $folder in 90% of cases.
+  * Default: $folder
 
-[*mbox_type*]
-  String. The method of saving your emails to the disk.
-  Note: http://www.linuxmail.info/mbox-maildir-mail-storage-formats/
-  Default: mbox
+### [*mbox_type*]
+  * String. The method of saving your emails to the disk.
+  * Note: http://www.linuxmail.info/mbox-maildir-mail-storage-formats/
+  * Default: mbox
 
-[*package*]
-  String. The name of the mutt package to install.
-  Default: mutt
+### [*package*]
+  * String. The name of the mutt package to install.
+  * Default: mutt
 
 ## Reference
 
