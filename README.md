@@ -14,16 +14,27 @@ This module installs and configure mutt email client.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+Simple installation with default options:
+
+    include mutt
+
+Using maildir in ~/.maildir
+
+    class { 'mutt':
+      folder => '~/.maildir',
+      mbox_type => 'maildir',
+    }
+
+Using system CA files for signature verification:
+
+    class { 'mutt':
+      certificate_file => '/etc/certs'
+    }
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+Defines only two resources: Package['mutt'] and File['/etc/Muttrc'].
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+This has been tested on RHEL 6.5 and Ubuntu 14.04 and has been found to work.
