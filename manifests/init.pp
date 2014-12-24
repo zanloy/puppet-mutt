@@ -68,57 +68,142 @@
 # Copyright 2014 Zan Loy
 #
 class mutt (
-  $alias_file       = $mutt::params::alias_file,
-  $certificate_file = $mutt::params::certificate_file,
-  $config_file      = $mutt::params::config_file,
-  $date_format      = undef,
-  $delete           = $mutt::params::delete,
-  $folder           = $mutt::params::folder,
-  $history_file     = $mutt::params::history_file,
-  $hostname         = undef,
-  $index_format     = undef,
-  $mbox             = $mutt::params::mbox,
-  $mbox_type        = $mutt::params::mbox_type,
-  $package          = $mutt::params::package,
-) inherits mutt::params {
+  $alias_file       = 'UNSET',
+  $certificate_file = 'UNSET',
+  $config_file      = 'UNSET',
+  $date_format      = 'UNSET',
+  $delete           = 'UNSET',
+  $folder           = 'UNSET',
+  $history_file     = 'UNSET',
+  $hostname         = 'UNSET',
+  $index_format     = 'UNSET',
+  $mbox             = 'UNSET',
+  $mbox_type        = 'UNSET',
+  $package          = 'UNSET',
+) {
 
-  package { $package:
+  include mutt::params
+
+  $alias_file_real = $alias_file ? {
+    'UNSET' => $mutt::params::alias_file,
+    default => $alias_file,
+  }
+
+  $certificate_file_real = $certificate_file ? {
+    'UNSET' => $mutt::params::certificate_file,
+    default => $certificate_file,
+  }
+
+  $config_file_real = $config_file ? {
+    'UNSET' => $mutt::params::config_file,
+    default => $config_file,
+  }
+
+  $date_format_real = $date_format ? {
+    'UNSET' => $mutt::params::date_format,
+    default => $date_format,
+  }
+
+  $delete_real = $delete ? {
+    'UNSET' => $mutt::params::delete,
+    default => $delete,
+  }
+
+  $folder_real = $folder ? {
+    'UNSET' => $mutt::params::folder,
+    default => $folder,
+  }
+
+  $history_file_real = $history_file ? {
+    'UNSET' => $mutt::params::history_file,
+    default => $history_file,
+  }
+
+  $hostname_real = $hostname ? {
+    'UNSET' => undef,
+    default => $hostname,
+  }
+
+  $index_format_real = $index_format ? {
+    'UNSET' => $mutt::params::index_format,
+    default => $index_format,
+  }
+
+  $mbox_real = $mbox ? {
+    'UNSET' => $mutt::params::mbox,
+    default => $mbox,
+  }
+
+  $mbox_type_real = $mbox_type ? {
+    'UNSET' => $mutt::params::mbox_type,
+    default => $mbox_type,
+  }
+
+  $package_real = $package ? {
+    'UNSET' => $mutt::params::package,
+    default => $package,
+  }
+
+  # END VARIABLE PARSING
+
+  package { $package_real:
     ensure => present,
   }
 
-  file { $config_file:
+  file { $config_file_real:
     ensure  => file,
     owner   => 'root',
     group   => 'root',
-    mode    => 0644,
-    require => Package[$package],
-  }
-
-  define setline ($path, $key=$name, $value) {
-    $regex = "^set ${key}="
-
-    if $value {
-      file_line { "${key}_line":
-        path => $path,
-        line => "set ${key}='${value}'",
-        match => $regex,
-      }
-    }
+    mode    => '0644',
+    require => Package[$package_real],
   }
 
   $options = {
-    'alias_file'        => { value => $alias_file },
-    'certificate_file'  => { value => $certificate_file },
-    'date_format'       => { value => $date_format },
-    'delete'            => { value => $delete },
-    'folder'            => { value => $folder },
-    'history_file'      => { value => $history_file },
-    'hostname'          => { value => $hostname },
-    'index_format'      => { value => $index_format },
-    'mbox'              => { value => $mbox },
-    'mbox_type'         => { value => $mbox_type },
+    'alias_file' => {
+      line => "set alias_file=${alias_file_real}",
+      match => 'set alias_file=.*',
+    },
+    'certificate_file' => {
+      line => "set certificate_file=${certificate_file_real}",
+      match => 'set certificate_file=.*',
+    },
+    'date_format' => {
+      line => "set date_format=${date_format_real}",
+      match => 'set date_format=.*',
+    },
+    'delete' => {
+      line => "set delete=${delete_real}",
+      match => 'set delete=.*',
+    },
+    'folder' => {
+      line => "set folder=${folder_real}",
+      match => 'set folder=.*',
+    },
+    'history_file' => {
+      line => "set history_file=${history_file_real}",
+      match => 'set history_file=.*',
+    },
+    'index_format' => {
+      line => "set index_format=${index_format_real}",
+      match => 'set index_format=.*',
+    },
+    'mbox' => {
+      line => "set mbox=${mbox_real}",
+      match => 'set mbox=.*',
+    },
+    'mbox_type' => {
+      line => "set mbox_type=${mbox_type_real}",
+      match => 'set mbox_type=.*',
+    },
   }
 
-  create_resources(setline, $options, { 'path' => $config_file })
+  create_resources(file_line, $options, { 'path' => $config_file_real })
 
+  if $hostname_real != undef {
+    file_line { 'hostname':
+      path  => $config_file_real,
+      line  => "set hostname=${hostname_real}",
+      match => 'set hostname=.*',
+    }
+  }
 }

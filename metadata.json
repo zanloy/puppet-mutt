@@ -1,17 +1,26 @@
 {
   "name": "zanloy-mutt",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "zanloy",
   "summary": "Module to install and configure mutt email client.",
-  "license": "Apache 2.0",
+  "license": "Apache License, Version 2.0",
   "source": "https://github.com/zanloy/puppet-mutt.git",
   "project_page": "https://github.com/zanloy/puppet-mutt",
   "issues_url": "https://github.com/zanloy/puppet-mutt/issues",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
-      "version_range": ">= 1.0.0"
+      "version_range": ">= 3.2.0"
     }
+  ],
+  "operatingsystem_support": [
+    { "operatingsystem": "ArchLinux"},
+    { "operatingsystem": "CentOS"},
+    { "operatingsystem": "Debian"},
+    { "operatingsystem": "RedHat"},
+    { "operatingsystem": "Ubuntu"}
+  ],
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">= 3.2.0"}
   ]
 }
-
