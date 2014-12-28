@@ -11,8 +11,13 @@ class mutt::params {
   $mbox = $folder
   $mbox_type = 'mbox'
 
-  # os specific changes?
-  $package = 'mutt'
+  # os specific values
+  case $::osfamily {
+    'ArchLinux': { $package = 'extra/mutt' }
+    'Debian': { $package = 'mutt-patched' }
+    'RedHat': { $package = 'mutt' }
+    default: { fail("Unsupported osfamily = ${::osfamily}") }
+  }
   $config_file = '/etc/Muttrc'
 
 }
