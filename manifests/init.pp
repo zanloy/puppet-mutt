@@ -21,7 +21,11 @@ class mutt (
   $mbox             = $mutt::params::mbox,
   $mbox_type        = $mutt::params::mbox_type,
   $package          = $mutt::params::package,
+  $sidebar          = $mutt::params::sidebar,
 ) inherits mutt::params {
+
+  # Parameter validation
+  if is_bool($sidebar) == false { fail('sidebar must be a boolean') }
 
   package { $package:
     ensure => present,
@@ -81,6 +85,15 @@ class mutt (
       path    => $config_file,
       line    => "set hostname=${hostname}",
       match   => 'set hostname=.*',
+      require => File[$config_file],
+    }
+  }
+
+  if $package == 'mutt-patched' and $sidebar == false {
+    file_line { 'sidebar':
+      path => $config_file,
+      line => 'set sidebar_visible=no',
+      match => 'set sidebar_visible=.*',
       require => File[$config_file],
     }
   }

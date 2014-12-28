@@ -19,5 +19,6 @@ class mutt::params {
     default: { fail("Unsupported osfamily = ${::osfamily}") }
   }
   $config_file = '/etc/Muttrc'
+  $sidebar = false # This isn't Outlook, don't try to make it ugly like that.
 
 }
