@@ -1,4 +1,4 @@
-# mutt
+# puppet-mutt [![Build Status](https://travis-ci.org/zanloy/puppet-mutt.svg?branch=master)](https://travis-ci.org/zanloy/puppet-mutt)
 
 #### Table of Contents
 
