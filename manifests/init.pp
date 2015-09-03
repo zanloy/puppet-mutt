@@ -91,9 +91,9 @@ class mutt (
 
   if $package == 'mutt-patched' and $sidebar == false {
     file_line { 'sidebar':
-      path => $config_file,
-      line => 'set sidebar_visible=no',
-      match => 'set sidebar_visible=.*',
+      path    => $config_file,
+      line    => 'set sidebar_visible=no',
+      match   => 'set sidebar_visible=.*',
       require => File[$config_file],
     }
   }
