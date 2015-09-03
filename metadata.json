@@ -1,6 +1,6 @@
 {
   "name": "zanloy-mutt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "zanloy",
   "summary": "Module to install and configure mutt email client.",
   "license": "Apache-2.0",
