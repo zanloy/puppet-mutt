@@ -49,7 +49,7 @@ class mutt (
       match => 'set certificate_file=.*',
     },
     'date_format' => {
-      line => "set date_format=${date_format}",
+      line => "set date_format=\"${date_format}\"",
       match => 'set date_format=.*',
     },
     'delete' => {
@@ -65,7 +65,7 @@ class mutt (
       match => 'set history_file=.*',
     },
     'index_format' => {
-      line => "set index_format=${index_format}",
+      line => "set index_format=\"${index_format}\"",
       match => 'set index_format=.*',
     },
     'mbox' => {
