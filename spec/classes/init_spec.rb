@@ -100,7 +100,7 @@ describe 'mutt' do
         it do
           should contain_file_line('date_format')
             .with_path(config_file)
-            .with_line('set date_format=!%a')
+            .with_line('set date_format="!%a"')
             .that_requires("File[#{config_file}]")
         end
         it do
@@ -124,7 +124,7 @@ describe 'mutt' do
         it do
           should contain_file_line('index_format')
             .with_path(config_file)
-            .with_line('set index_format=%4C')
+            .with_line('set index_format="%4C"')
             .that_requires("File[#{config_file}]")
         end
         it do
